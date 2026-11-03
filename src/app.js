@@ -1,3 +1,4 @@
+import {installViewportSize} from './viewport-size.js';
 import {setupInstall,installInstructions} from './install.js';
 import { RARE_FORMS, rareLabel, normalizeCollection, mergeCollection } from './rare-monsters.js';
 import { chooseAttackEffect, effectMarkup } from './attack-effects.js';
@@ -13,6 +14,7 @@ import { CURRICULUM, QUESTIONS, sceneArt } from './learning.js';
 import { newGame, claimLuckyEvent, activeMonster, answer, continueBattle, capture, replaceCapture, REWARDS, chooseReward, reward, rewardMultiplier, nextStage, bossPassiveCount, shieldStat } from './game.js';
 const root=document.querySelector('#app');
 installInputGuard(root);
+installViewportSize();
 let game=null,selected='ember',view='home',dialog=null,inheritSelected=false;
 let storageAvailable=true;
 let menuPage=0;

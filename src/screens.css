@@ -179,3 +179,25 @@ body:has(.view-home) .top-right{gap:8px;min-width:0}
 .main-nav .parent-nav{flex:0 1 auto;color:#aab9ca;background:#202c3a;border-left:1px solid #536276;border-bottom-color:transparent;border-radius:6px 6px 0 0;margin-left:10px;padding-left:14px;padding-right:14px}
 .main-nav .parent-nav:hover{color:#e0e8f2;background:#2b3b4d}.main-nav .parent-nav.active{color:#e3ecf8;background:#30445c;border-bottom-color:#9bb5d4}
 @media(max-width:760px){.main-nav .parent-nav{margin-left:5px;padding:0 9px;font-size:14px}}
+/* Fit the actual visible browser area, including expanded Chrome toolbars. */
+:root{--app-height:100svh}
+body,body.playing,body:has(.view-home){height:var(--app-height);max-height:var(--app-height)}
+#app{min-height:0;overflow:hidden}
+main,.playing main,.view-home{padding-bottom:20px}
+.view-home .choose-section{flex:1 1 0;height:0;min-height:0}
+.view-home .starter-grid{flex:1 1 0;height:0;min-height:0;grid-template-rows:minmax(0,1fr)}
+.view-home .start-row{flex:0 0 auto;margin-top:4px;padding:0 2px 4px}
+@media(max-width:760px) and (orientation:portrait){
+ .view-home .starter-grid{grid-template-rows:repeat(3,minmax(0,1fr))}
+ .view-home .starter{grid-template-rows:auto minmax(0,1fr);align-content:center}
+ .view-home .starter-portrait{grid-row:1/3}
+ .view-home .starter-ability{align-self:center}
+ .short-viewport .view-home .starter-ability strong{display:none}
+ .short-viewport .view-home .starter-portrait>.monster-art{width:56px;height:56px}
+ .short-viewport .view-home .starter-title-row h3{font-size:20px}
+}
+@media(max-width:760px) and (orientation:portrait){
+ .short-viewport .playing .play-column{grid-template-rows:minmax(0,.85fr) minmax(0,1.15fr)}
+ .short-viewport .playing .answer{min-height:44px;padding:4px}
+ .short-viewport .playing .question-footnote{display:none}
+}
