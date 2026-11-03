@@ -160,3 +160,17 @@ html,body,#app{overscroll-behavior:none}
 .playing .treasure-scene h2{color:#fff0b5;font-size:clamp(24px,3vw,34px)}
 @media(orientation:portrait){.playing .treasure-art{flex-basis:180px;width:min(70%,260px)}.playing .treasure-scene{padding:10px;gap:4px}.playing .treasure-scene .scene-heading{font-size:18px}.playing .treasure-scene h2{font-size:24px}}
 @media(prefers-reduced-motion:reduce){.rare-sparkle,.treasure-halo,.treasure-rays{animation:none}.rare-sparkle{opacity:.8}}
+/* Reserve controls inside the landing layout; never append Continue below it. */
+body{padding:env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);box-sizing:border-box}
+.view-home .home-tools{display:flex;flex:none;justify-content:center;gap:6px;flex-wrap:wrap}
+.view-home .home-tools button{min-height:44px;padding:8px 12px;font-size:16px;margin:0}
+.view-home .start-row{display:flex;flex-direction:row;gap:8px;justify-content:center;flex:none}
+.view-home .start-row>button{flex:1;min-width:0;max-width:440px;margin:0;min-height:48px;font-size:20px;padding:10px}
+.install-help li{font-size:18px;line-height:1.4}.install-help .notice{font-size:16px;margin:12px 0}.install-help>.primary{min-height:44px}
+@media(max-width:760px){.view-home .home-tools{display:grid;grid-template-columns:1fr 1fr;gap:4px}.view-home .home-tools [data-action="install"]{grid-column:1/-1}.view-home .choose-section{gap:6px}.view-home .start-row>button{font-size:18px}.view-home .starter-grid{grid-template-rows:repeat(3,minmax(0,1fr))}.view-home .starter-portrait{min-height:0;display:flex;align-items:center}.view-home .starter-portrait>.monster-art{width:min(80px,14dvh);height:min(80px,14dvh)}.view-home .starter{overflow:hidden}.view-home .starter-title-row h3{font-size:21px}}
+@media(max-height:520px) and (orientation:landscape){.view-home .section-heading{display:none}.view-home .starter-ability{display:none}.view-home .starter-grid{grid-template-columns:repeat(3,minmax(0,1fr));grid-template-rows:minmax(0,1fr)}.view-home .starter{display:flex;gap:0;padding:4px}.view-home .starter-portrait{min-height:0}.view-home .starter-portrait>.monster-art{width:70px;height:70px}.view-home .home-tools{display:flex}.view-home .start-row>button{min-height:44px;padding:6px}.view-home .inherit-card small{display:none}}
+@media(max-width:760px) and (max-height:620px) and (orientation:portrait){.view-home .starter-ability strong{display:none}.view-home .starter{grid-template-columns:60px 1fr;padding:5px 8px}.view-home .starter.selected{padding:4px 7px}.view-home .starter-portrait>.monster-art{width:56px;height:56px}.view-home .starter-ability small{font-size:16px;line-height:1.2}.view-home .starter-title-row h3{font-size:20px}.view-home .start-row>button{font-size:16px;padding:6px;min-height:48px}.view-home .selection-dot{width:22px;height:22px;font-size:16px;line-height:1}}
+.topbar .install-top{min-height:36px;padding:6px 10px;font-size:16px;line-height:1.1;white-space:normal;margin:0}
+body:has(.view-home) .topbar .version{display:none}
+body:has(.view-home) .top-right{gap:8px;min-width:0}
+@media(max-width:760px){body:has(.view-home) .topbar{padding:0 8px;gap:6px;height:52px;min-height:52px}body:has(.view-home) .brand{font-size:18px}body:has(.view-home) .brand-mark{display:none}.topbar .install-top{font-size:14px;max-width:142px;min-height:40px;padding:4px 8px}.view-home .home-tools{grid-template-columns:1fr 1fr}}
