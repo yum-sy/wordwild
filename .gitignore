@@ -1,0 +1,12 @@
+.DS_Store
+node_modules/
+dist/
+.env*
+SPEC.md
+docs/
+assets/*.md
+assets/*sources.json
+assets/*preview.html
+assets/regions/preview.html
+src/qa-*
+qa-*.html

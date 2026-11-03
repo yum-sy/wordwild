@@ -1,0 +1,14 @@
+{
+  "name": "wordwild",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "node server.js",
+    "start": "node server.js",
+    "test": "node --test",
+    "check": "node --check src/app.js && node --check src/game.js && node --check src/learning.js && node --check src/learning-content.js && node --check src/learning-record.js && node --check src/learning-scenes.js && node --check src/word-pictures.js && node --check src/extra-pictures.js && node --check src/battle-sequence.js && node --check src/run-store.js && node --check src/input-guard.js && node --check src/curriculum-design.js && node --check src/reading-help.js && node --check src/attack-effects.js && node --check src/rare-monsters.js",
+    "audit:learning": "node scripts/audit-learning.js",
+    "build": "node scripts/build-pages.js"
+  }
+}

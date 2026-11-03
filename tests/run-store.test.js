@@ -1,0 +1,10 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import {newGame,answer,continueBattle,capture,createMonster} from '../src/game.js';
+import {loadRun,saveRun,RUN_KEY} from '../src/run-store.js';
+import {freshLearning,noteAnswer,normalizeLearning} from '../src/learning-record.js';
+const storage=()=>{const m=new Map();return {getItem:k=>m.get(k),setItem:(k,v)=>m.set(k,v),removeItem:k=>m.delete(k)};};
+test('resume a wrong answer without repeat damage or unlocking rejected choices',()=>{const s=storage(),g=newGame('ember',null,()=>.1);g.party[0].maxHp=g.party[0].currentHp=100;g.enemy.attack=1;const wrong=(g.question.correctIndex+1)%4;answer(g,wrong);const hp=g.party[0].currentHp;saveRun(s,g);const r=loadRun(s);assert.ok(r);assert.equal(r.party[0].currentHp,hp);assert.deepEqual(r.question,g.question);assert.deepEqual(r.rejected,[wrong]);assert.equal(r.learning.firstTotal,1);assert.equal(r.feedback,null);assert.ok(!r.party.some(m=>m.id===createMonster('ember').id));});
+test('resume victory and capture keeps rolled loot and caught teammate',()=>{const s=storage(),g=newGame('ember',null,()=>.1);g.enemy.currentHp=1;g.enemy.currentShield=0;answer(g,g.question.correctIndex);saveRun(s,g);const r=loadRun(s);assert.equal(r.phase,'capture');assert.deepEqual(r.rewardChoices,g.rewardChoices);capture(r,()=>0);saveRun(s,r);const loaded=loadRun(s);assert.equal(loaded.party.length,2);assert.equal(loaded.attempts,1);assert.equal(loaded.captureResult,'success');});
+test('death, explicit reset, corruption and unavailable storage do not restore a run',()=>{const s=storage(),g=newGame('ember',null,()=>.1);saveRun(s,g);g.pending='game-over';saveRun(s,g);assert.equal(loadRun(s),null);s.setItem(RUN_KEY,'bad');assert.equal(loadRun(s),null);saveRun(s,null);assert.equal(loadRun(s),null);assert.equal(saveRun(null,g),false);});
+test('per-level progress counts first attempts only and survives normalization',()=>{const p=freshLearning(),q={id:'sample',skillId:'sample',grammarLevel:4};noteAnswer(p,q,false,1);noteAnswer(p,q,true,2);assert.deepEqual(normalizeLearning(p).levels[4],{firstTotal:1,firstRight:0});});

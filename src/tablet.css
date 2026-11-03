@@ -1,0 +1,78 @@
+/* Tablet play surface follows the available viewport, including browser chrome. */
+html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
+button{touch-action:manipulation;-webkit-tap-highlight-color:transparent}
+button:focus-visible{outline:3px solid #fff1ac;outline-offset:3px}
+body.playing{overscroll-behavior:none;height:100vh;height:100dvh;padding:env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);box-sizing:border-box}
+@media(min-width:761px) and (max-width:1400px){
+.playing .topbar{height:52px;min-height:52px}.playing .icon-btn{min-width:48px;min-height:48px}
+.playing .main-nav{height:52px;min-height:52px;justify-content:center}.playing .nav-item{min-height:48px;padding:0 24px;font-size:20px}
+.playing .game-tools .compact{min-height:44px;font-size:18px}.playing .phase-actions button,.playing .phase-card>.primary,.playing .phase-card>.secondary{min-height:52px;font-size:22px}
+.playing .feedback .primary{min-height:48px}.playing .answer{min-height:64px}.playing .question-prompt h2{font-size:38px}.playing .text-answers .answer{font-size:24px}
+.playing .reward-card{min-height:180px}.playing .reward-card strong{font-size:24px}.playing .reward-card>span:last-of-type{font-size:20px;line-height:1.3}
+.playing .target-card{min-height:160px}.playing .target-card>strong{font-size:24px}
+.playing .phase-card p{font-size:20px}.playing .phase-card h2{font-size:30px}
+.playing .camp-party .party-mini{min-height:130px}.playing .camp-party .party-mini>.monster-art{width:64px;height:64px}
+}
+@media(min-width:761px) and (max-width:1400px) and (orientation:portrait){
+.playing main{width:calc(100% - 32px);gap:8px;padding:8px 0}
+.playing .play-column{grid-template-columns:1fr;grid-template-rows:minmax(0,.95fr) minmax(0,1.05fr);gap:12px}
+.playing .arena{grid-row:1}.playing .question-panel{grid-row:2}
+.playing .fighter-hud{top:32px;width:calc(50% - 40px);left:20px}.playing .enemy-hud{left:auto;right:20px}
+.playing .side-label{font-size:20px;padding:4px 12px}.playing .hud-title>strong{font-size:24px}.playing .hud-stats{margin-top:2px}.playing .arena-bottom{min-height:42px;padding:8px 14px;font-size:18px}
+.playing .combatant.player,.playing .combatant.opponent{bottom:40px}.playing .combatant.player{left:4%}.playing .combatant.opponent{right:4%}
+.playing .combatant>.monster-art{width:clamp(130px,17dvh,200px);height:clamp(130px,17dvh,200px)}
+.playing .boss-arena .fighter-hud{top:66px}.playing .boss-info{top:30px}
+.playing .question-content{display:grid;grid-template-columns:minmax(0,.85fr) minmax(0,1.15fr);align-items:stretch;gap:16px;padding:14px}
+.playing .question-prompt{gap:12px}.playing .question-help{font-size:22px}.playing .question-prompt h2{font-size:40px}.playing .context-scene{width:150px}.playing .context-scene .scene-art{height:100px}
+.playing .answers{height:100%;gap:12px}.playing .answer,.playing .text-answers .answer{padding:24px 10px 10px;font-size:26px}.playing .answer .picture-emoji{font-size:56px}.playing .answer .scene-art{height:80px}
+.playing .feedback,.playing .question-footnote{height:82px;min-height:82px}.playing .feedback strong{font-size:23px}.playing .feedback span{font-size:20px}
+.playing .phase-card{grid-row:1/-1;gap:16px;padding:24px}.playing .capture-portrait{width:25dvh;height:25dvh;max-width:280px;max-height:280px}.playing .capture-screen .stat-row{font-size:22px;padding:10px 14px}
+.playing .reward-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}.playing .reward-card,.playing .reward-card.special{padding:24px 16px;gap:12px;min-height:210px}.playing .reward-icon{font-size:44px}
+.playing .target-grid{gap:12px}.playing .target-card{padding:14px 8px}.playing .target-card>.monster-art{width:110px;height:110px}.playing .target-card .stat-rows{flex-direction:column;width:100%;gap:6px}.playing .target-card .stat-row{font-size:18px}.playing .target-card>small{line-height:1.4}
+.playing .new-catch{gap:18px;padding:12px 20px}.playing .new-catch>.monster-art{width:110px;height:110px}
+.playing .camp-party{flex-direction:column;max-width:540px}.playing .camp-party .party-mini{width:100%;min-height:130px;padding:12px 20px}.playing .camp-party .party-mini>.monster-art{width:90px;height:90px}
+}
+@media(min-width:761px) and (max-width:1400px) and (orientation:landscape){
+.playing .play-column{grid-template-columns:minmax(0,1fr) minmax(0,1.1fr)}
+.playing .reward-grid{grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}.playing .reward-card,.playing .reward-card.special{padding:18px 10px;gap:10px}.playing .reward-card strong{font-size:22px}
+.playing .target-card .stat-rows{gap:5px}.playing .target-card .stat-row{padding:5px 7px;font-size:18px}
+.playing .fighter-hud{width:calc(50% - 20px)}.playing .combatant>.monster-art{width:clamp(145px,18vw,215px);height:clamp(145px,18vw,215px)}
+}
+@media(min-width:761px) and (orientation:portrait) and (max-height:1000px){
+.playing .hud-stats{display:none}.playing .fighter-hud{padding:8px}.playing .side-label{margin:-8px -8px 4px}.playing .combatant>.monster-art{width:140px;height:140px}
+.playing .phase-card{gap:10px;padding:16px}.playing .reward-card,.playing .reward-card.special{min-height:185px;padding:18px 12px}.playing .target-card>.monster-art{width:85px;height:85px}.playing .new-catch>.monster-art{width:80px;height:80px}
+}
+/* Starter selection also fits a tablet without putting Play below the fold. */
+@media(min-width:761px) and (max-width:1400px){
+body:has(.view-home){height:100dvh;overflow:hidden}
+body:has(.view-home) #app{height:100%;display:flex;flex-direction:column}
+body:has(.view-home) .topbar{height:52px;min-height:52px}
+body:has(.view-home) .main-nav{height:52px;min-height:52px}
+.view-home{flex:1;min-height:0;display:flex;flex-direction:column;gap:12px;padding:12px 0;width:calc(100% - 32px)}
+.view-home .home-banner,.view-home .evolution-preview,.view-home .home-footer{display:none}
+.view-home .choose-section{flex:1;min-height:0;display:flex;flex-direction:column;gap:12px}
+.view-home .section-heading{margin:0;flex:none}.view-home .section-heading h2{font-size:30px}
+.view-home .starter-grid{flex:1;min-height:0;gap:16px;grid-template-columns:repeat(3,minmax(0,1fr))}
+.view-home .starter{padding:16px;display:flex;flex-direction:column;min-height:0}.view-home .starter.selected{padding:15px}
+.view-home .starter-portrait{flex:1;min-height:80px;height:auto;margin:0}.view-home .starter-portrait>.monster-art{width:clamp(100px,21vh,210px);height:clamp(100px,21vh,210px)}
+.view-home .starter-title-row{width:100%}.view-home .starter-title-row h3{font-size:26px}.view-home .starter-title{font-size:18px}.view-home .starter-ability{width:100%;margin-top:10px;padding-top:10px;min-height:100px}
+.view-home .start-row{margin:0;flex:none}.view-home .start-row>.primary{min-height:56px;font-size:22px}.view-home .inherit-card{margin:0;padding:8px 16px}
+}
+@media(min-width:761px) and (max-width:1400px){
+.playing .camp-party .party-mini>div>span{display:none}.playing .camp-party .party-mini .shield-label{display:inline;margin-left:12px}.playing .camp-party .party-mini .hp-line{margin:4px 0;line-height:1.25}.playing .camp-party .party-mini strong{line-height:1.2}.playing .camp-party .party-mini small{line-height:1.3}.playing .camp-party .party-mini .hp-track{margin:4px 0;height:8px}
+}
+@media(min-width:761px) and (max-width:1400px) and (orientation:portrait){
+.playing .camp-party .party-mini{flex:none;min-height:110px;padding:10px 18px}.playing .camp-party .party-mini>.monster-art{width:76px;height:76px}.playing .camp-icon{display:none}
+}
+@media(min-width:761px) and (max-width:1400px) and (orientation:landscape) and (max-height:740px){
+.playing .swap-screen{gap:6px}.playing .swap-screen .new-catch{padding:6px 12px}.playing .swap-screen .target-card{gap:5px;min-height:0;padding:8px}.playing .swap-screen .target-card>.monster-art{width:64px;height:64px}
+.playing .swap-screen .target-card .stat-row>span{font-size:0}.playing .swap-screen .target-card .stat-row>span>span{font-size:22px}.playing .swap-screen .target-card>small{display:none}.playing .swap-screen .target-card .stat-rows>small{font-size:16px}.playing .swap-screen .target-card .stat-row{padding:4px 6px}
+}
+/* Vocabulary illustrations share one silhouette scale on every platform. */
+.answer .word-picture{display:block;width:100%;height:100px;max-height:100%;margin:auto;overflow:visible}
+.playing .answer .word-picture{height:100%;max-height:105px;min-height:48px}
+.playing .context-scene .word-picture{width:100%;height:100%}
+@media(min-width:761px) and (orientation:portrait){.playing .answer .word-picture{max-height:110px}}
+@media(max-width:760px){.playing .answer .word-picture{max-height:70px}}
+.playing .answer:has(.word-picture){padding:6px 26px}
+.playing .answer:has(.word-picture) .word-picture{max-height:120px;min-height:0;align-self:stretch}

@@ -1,0 +1,42 @@
+/* Four position families × four silhouettes. All travel resolves inside the existing turn. */
+.varied-fx{--fx-color:var(--attack-color);--fx-light:#fff8cd;top:0}
+.varied-fx.fx-wave{--fx-color:#62dce7;--fx-light:#e4ffff}
+.varied-fx.fx-spark{--fx-color:#ffc85d;--fx-light:#fff8d4}
+.varied-fx.fx-star{--fx-color:#b9a0ff;--fx-light:#fff1ff}
+.fx-projectile,.fx-impact,.fx-ripple{position:absolute;display:none;top:66%;translate:-50% -50%;pointer-events:none}
+.fx-projectile{left:var(--from);width:clamp(66px,11vw,112px);height:clamp(66px,11vw,112px);filter:drop-shadow(0 0 5px var(--fx-color))}
+.fx-projectile svg,.fx-impact svg{width:100%;height:100%;overflow:visible}
+.fx-projectile svg{transform:scaleX(var(--travel))}
+.turn-cast .fx-projectile{display:block;animation:fx-flight 550ms ease-in both}
+.turn-cast .fx-slash .fx-projectile svg{animation:fx-blade 550ms ease-out both}
+.turn-cast .fx-wave .fx-projectile{animation-name:fx-wave-flight}
+.turn-cast .fx-spark .fx-projectile{animation-name:fx-spark-flight}
+.turn-cast .fx-star .fx-projectile{animation-name:fx-arc-flight}
+.turn-cast .fx-star .fx-projectile svg{animation:fx-star-spin 550ms linear both}
+.fx-impact{left:var(--to);width:clamp(90px,14vw,140px);height:clamp(90px,14vw,140px)}
+.turn-impact .fx-impact{display:block;animation:fx-hit 600ms ease-out both}
+.fx-ripple{left:var(--to);width:90px;height:90px;border:3px solid var(--fx-color);border-radius:50%}
+.turn-impact .fx-ripple{display:block;animation:fx-ring 600ms ease-out both}
+.varied-fx .charge-ring{top:66%;width:65px;height:65px;border-color:var(--fx-color);box-shadow:0 0 12px var(--fx-color)}
+.fx-slash .charge-ring{border-radius:15% 80%;rotate:-35deg}
+.fx-spark .charge-ring{border-radius:15%;rotate:45deg}
+.fx-star .charge-ring{border-style:dashed}
+.fx-ultimate .fx-projectile,.fx-ultimate .fx-impact{width:150px;height:150px}
+.fx-blocked .fx-impact{opacity:.35;filter:saturate(.4)}
+.varied-fx .shield-flare{z-index:2;top:66%}
+.varied-fx .impact-word{top:49%;z-index:3}
+@keyframes fx-flight{0%{left:var(--from);opacity:0;scale:.5}12%{opacity:1}100%{left:var(--to);scale:1}}
+@keyframes fx-wave-flight{0%{left:var(--from);margin-top:0;opacity:0}15%{opacity:1}45%{margin-top:-20px}75%{margin-top:10px}100%{left:var(--to);margin-top:0}}
+@keyframes fx-spark-flight{0%{left:var(--from);opacity:0}15%{opacity:1}30%{margin-top:-12px}50%{margin-top:12px}70%{margin-top:-8px}100%{left:var(--to);margin-top:0}}
+@keyframes fx-arc-flight{0%{left:var(--from);margin-top:0;opacity:0;scale:.5}15%{opacity:1}50%{margin-top:-40px}100%{left:var(--to);margin-top:0;scale:1}}
+@keyframes fx-blade{from{transform:scaleX(var(--travel)) rotate(-65deg)}to{transform:scaleX(var(--travel)) rotate(20deg)}}
+@keyframes fx-star-spin{from{transform:scaleX(var(--travel)) rotate(-90deg)}to{transform:scaleX(var(--travel)) rotate(90deg)}}
+@keyframes fx-hit{0%{scale:.5;opacity:1;rotate:-15deg}30%{scale:1.15;opacity:1}100%{scale:1.35;opacity:0;rotate:20deg}}
+@keyframes fx-ring{from{scale:.3;opacity:.8}to{scale:1.7;opacity:0}}
+@media(prefers-reduced-motion:reduce){
+ .varied-fx *,.varied-fx~.damage-pop{animation:none!important}
+ .turn-cast .varied-fx .fx-projectile{left:var(--to);opacity:.8}
+ .turn-impact .varied-fx .fx-impact{opacity:.55}
+ .turn-impact .varied-fx .fx-ripple{display:none}
+ .turn-cast .combatant,.turn-impact .sprite-pixels{animation:none!important}
+}
