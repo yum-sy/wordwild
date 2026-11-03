@@ -176,3 +176,6 @@ body:has(.view-home) .top-right{gap:8px;min-width:0}
 @media(max-width:760px){body:has(.view-home) .topbar{padding:0 8px;gap:6px;height:52px;min-height:52px}body:has(.view-home) .brand{font-size:18px}body:has(.view-home) .brand-mark{display:none}.topbar .install-top{font-size:14px;max-width:142px;min-height:40px;padding:4px 8px}.view-home .home-tools{grid-template-columns:1fr 1fr}}
 .hero-tabs{display:flex;gap:8px;justify-content:center;flex:none}.hero-tabs button{min-height:44px;padding:8px 14px;font-size:18px}
 @media(max-width:760px){.main-nav,.playing .main-nav{gap:0;justify-content:space-between}.nav-item,.playing .nav-item{flex:1;min-width:0;white-space:nowrap;padding:0 3px;font-size:14px}.nav-item>span{display:none}.hero-tabs button{flex:1;font-size:16px;padding:8px}.view-collection .menu-sheet{gap:10px}.view-collection .menu-sheet p{font-size:16px}}
+.main-nav .parent-nav{flex:0 1 auto;color:#aab9ca;background:#202c3a;border-left:1px solid #536276;border-bottom-color:transparent;border-radius:6px 6px 0 0;margin-left:10px;padding-left:14px;padding-right:14px}
+.main-nav .parent-nav:hover{color:#e0e8f2;background:#2b3b4d}.main-nav .parent-nav.active{color:#e3ecf8;background:#30445c;border-bottom-color:#9bb5d4}
+@media(max-width:760px){.main-nav .parent-nav{margin-left:5px;padding:0 9px;font-size:14px}}
