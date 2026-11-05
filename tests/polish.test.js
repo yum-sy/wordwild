@@ -17,3 +17,11 @@ test('shield quarters and large stats remain bounded with exact grouping labels'
  assert.match(statPips('hp',100,100),/×13/);
  assert.equal((statPips('shield',1,2,3).match(/class="stat-symbol shield"/g)||[]).length,3);
 });
+
+test('compact target stats distinguish current resources, maxima and shield fragments',async()=>{
+ const {compactStats}=await import('../src/stat-art.js');
+ const markup=compactStats({currentHp:12,maxHp:74,attack:33,currentShield:1,maxShield:13,shieldFragments:3});
+ assert.match(markup,/aria-label="HP 12 of 74"/);assert.match(markup,/aria-label="Attack 33"/);assert.match(markup,/aria-label="Shield 1 of 13, 3 of 4 pieces"/);
+ assert.equal((markup.match(/class="stat-symbol/g)||[]).length,4);
+ const large=compactStats({currentHp:999,maxHp:999,attack:999,currentShield:99,maxShield:99,shieldFragments:0});assert.equal((large.match(/class="stat-symbol/g)||[]).length,3);
+});

@@ -45,3 +45,13 @@ test('approved effects ship and reward sounds match their stats',async()=>{
  assert.equal(rewardSound('attack'),'attack-up');assert.equal(rewardSound('shards'),'shield-up');assert.equal(rewardSound('heal'),'hp-up');
  const events=[{key:'boss-clear',at:0},{key:'click',at:1},{key:'hit',at:1}];assert.equal(levelAt(1.1,events,EFFECTS),.22);assert.equal(levelAt(5,events,EFFECTS),1);
 });
+
+test('WebKit audio fallback works and unavailable audio never blocks gameplay',async()=>{
+ const original=globalThis.fetch;globalThis.fetch=async()=>({ok:false});let made=0,resumed=0;
+ const doc={hidden:false,addEventListener(){}};
+ class WebKitContext{constructor(){made++;}currentTime=0;destination={};createGain(){return {gain:{value:1},connect(){}};}async resume(){resumed++;}}
+ try{
+  const audio=createMusic({host:{webkitAudioContext:WebKitContext,addEventListener(){}},doc});audio.sync('home',null);assert.equal(made,0);await audio.unlock();await audio.cue('click');assert.equal(made,1);assert.equal(resumed,1);
+  const unsupported=createMusic({host:{addEventListener(){}},doc});await unsupported.unlock();await unsupported.cue('hit');unsupported.sync('home',null);assert.equal(unsupported.enabled,true);
+ }finally{globalThis.fetch=original;}
+});
