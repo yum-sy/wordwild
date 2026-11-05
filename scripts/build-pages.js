@@ -12,6 +12,6 @@ async function copy(source){
   await writeFile(dest,text.replace(/(["'(])\/(assets|src)\//g,`$1${base}$2/`).replace(/(["'])([^"'\s]+\.(?:js|css))\1/g,(match,quote,url)=>`${quote}${url}?v=${version}${quote}`));
  }else await copyFile(source,dest);
 }
-async function walk(dir){for(const e of await readdir(dir,{withFileTypes:true})){const p=path.join(dir,e.name);if(e.isDirectory())await walk(p);else if(dir.startsWith('src')?/\.(js|css)$/.test(p)&&!e.name.startsWith('qa-'):/\.(png|svg)$/.test(p))await copy(p);}}
+async function walk(dir){for(const e of await readdir(dir,{withFileTypes:true})){const p=path.join(dir,e.name);if(e.isDirectory())await walk(p);else if(dir.startsWith('src')?/\.(js|css)$/.test(p)&&!e.name.startsWith('qa-'):/\.(png|svg|m4a)$/.test(p))await copy(p);}}
 await copy('index.html');await copy('manifest.webmanifest');await walk('src');await walk('assets');await writeFile('dist/.nojekyll','');
 console.log(`Built Pages site for ${base}`);

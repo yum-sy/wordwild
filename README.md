@@ -114,3 +114,7 @@ Four answer positions map to slash, wave, lightning and star/crystal families, w
 - Capturing a rare appearance registers its species/form in the local `wordwild-rare-collection`, even if a full-party capture is then released. The paged Rare finds menu is available on the start screen. It is a record, not permanent access to every captured monster. Chosen-hero inheritance retains the appearance.
 - Each non-boss stage, including stage 1, rolls a 0.75% lucky event on entry. An event replaces that stage's battle: no question generation, answer counts, or learning exposure. Gift choices are equally likely: Golden Net; Team Shield; Magic Spring (full team HP/shields plus a Golden Net). Take the gift once, then continue through camp. Boss stages always battle. Rewards and claimed state survive reload; no reroll on resume. Existing saved runs remain supported.
 - Tests include rare-form boundaries, capture/evolution/inheritance, collection deduplication, boss exclusion, no question exposure, all gifts, and save/resume claim-once behavior. Probability values are initial tuning, not validated retention or learning outcomes.
+
+## Music
+
+Six approved instrumental tracks cover the home screen, stages 1–30 / 31–60 / 61–100, dragon bosses and the final boss. Victory, successful capture and awakening have short cues. Audio starts only after a tap, fades between tracks, pauses while hidden, and remembers the ♪ On/Off preference on this browser. AAC assets are loaded on demand. Original audition WAV files remain local and are not published.

@@ -108,3 +108,5 @@ html{background:#101821}body{background:#101821}.topbar{background:#101821!impor
 .playing .has-passage>.panel-heading>small{display:block!important}
 .playing .reward-capture-up .reward-icon,.playing .reward-capture-up-plus .reward-icon,.playing .reward-golden-net .reward-icon{display:block;position:absolute;right:8px;top:8px}
 .playing .reward-capture-up .capture-icon,.playing .reward-capture-up-plus .capture-icon,.playing .reward-golden-net .capture-icon{width:26px;height:26px}
+.topbar .music-toggle{font-size:16px;white-space:nowrap;min-width:58px;min-height:40px;padding:6px 8px;margin:0}.topbar .top-right{gap:8px}
+@media(max-width:760px){body:has(.view-home) .topbar .install-top{max-width:110px;font-size:12px;padding:4px}.topbar .music-toggle{font-size:14px;min-width:48px;padding:4px}body:has(.view-home) .top-right{gap:4px}.topbar .icon-btn{flex:none}body:has(.view-home) .brand{font-size:16px}}
