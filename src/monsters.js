@@ -26,5 +26,5 @@ export function monsterArt(m,size=160) {
   const atlas=s.atlas||'original';
   const cell=s.cell,col=cell%4,row=Math.floor(cell/4);
   const frame=MONSTER_FRAMES[atlas]?.[cell];
-  return `<span class="monster-art rare-${typeof m==='object'?m.rareForm||'normal':'normal'} atlas-${atlas} evo-${evo} ${typeof m==='object'?m.evolutionRoute||'':''}" style="--sprite-x:${frame?.x??col*100/3}%;--sprite-y:${frame?.y??row*100/3}%;--sprite-sheet-size:${frame?.zoom||400}%;--sprite-clip:${frame?.clip||'0%'};--sprite-size:${size}px;--aura:${s.color}" aria-hidden="true"><span class="sprite-pixels"></span>${sparkles}</span>`;
+  return `<span class="monster-art rare-${typeof m==='object'?m.rareForm||'normal':'normal'} atlas-${atlas} evo-${evo} ${typeof m==='object'?m.evolutionRoute||'':''}" style="--sprite-x:${frame?.x??col*100/3}%;--sprite-y:${frame?.y??row*100/3}%;--sprite-sheet-size:${frame?.zoom||400}%;--sprite-clip:${frame?.clip||'0%'};--sprite-size:${size}px;--ground-bottom:${frame?.clip?.split(' ')[2]||'5%'};--aura:${s.color}" aria-hidden="true"><i class="monster-ground"></i><span class="sprite-pixels"></span>${sparkles}</span>`;
 }

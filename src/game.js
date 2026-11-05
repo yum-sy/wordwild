@@ -39,12 +39,15 @@ export function evolve(m,route=null,force=false) {
   const eligible=[];
   if(m.maxHp>=b.hp*2) eligible.push('hp');
   if(m.attack>=b.attack*2) eligible.push('attack');
-  if(shieldStat(m)>=b.shieldStat*3) eligible.push('shield');
+  if(m.maxShield>=3&&shieldStat(m)>=b.shieldStat*3) eligible.push('shield');
   route=route || BALANCE.evolutionPriority.find(r=>eligible.includes(r));
   if(!force&&!eligible.includes(route)) return false;
+  const before={hp:m.maxHp,attack:m.attack,shield:m.maxShield};
+  const threshold=route==='shield'?Math.max(12,b.shieldStat*3):b[route]*2;
   if(route==='hp') { m.maxHp+=Math.max(1,Math.ceil(m.maxHp*.2)); m.currentHp=m.maxHp; }
   if(route==='attack') { m.attack+=Math.max(1,Math.ceil(m.attack*.15)); m.currentHp=m.maxHp; }
   if(route==='shield') { addShield(m,0,1); m.currentShield=m.maxShield; }
+  m.lastEvolution={route,before,threshold,after:{hp:m.maxHp,attack:m.attack,shield:m.maxShield}};
   m.evolutionStage++;m.evolutionRoute=route;m.evolutionBaseline=baseline(m);
   return true;
 }

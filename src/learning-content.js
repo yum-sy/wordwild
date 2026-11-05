@@ -11,10 +11,11 @@ const pickOthers=(arr,value,n=3)=>{const i=arr.indexOf(value);return Array.from(
 function add(level,key,family,skill,prompt,options,meaning,scene=null,type='image-choice'){
  pool.push({id:`v2-${level}-${key}`,familyId:`L${level}-${family}`,skillId:skill,grammarLevel:level,stageMin:(level-1)*10+1,stageMax:100,vocabularyTags:[skill],questionType:type,prompt,options,correctIndex:0,meaning,scene});
 }
-// Isolated objects and a highlighted object among other objects test visual transfer.
+// Keep old question IDs for saved records; early nouns now use isolated pictures.
+// Both legacy layouts share one family so they are not counted as different contexts.
 for(const level of [1])for(const word of words.slice(0,level===1?40:50))for(const context of [false,true])for(const reverse of [false,true]){
  const candidates=[word,...pickOthers(words,word)];const data={kind:'noun',word,context};
- add(level,`${word}-${context}-${reverse}`,`${context?'scene':'single'}-${reverse?'read':'picture'}`,`noun:${word}`,reverse?(context?'Name the marked picture.':'Name the picture.'):word,
+ add(level,`${word}-${context}-${reverse}`,`single-${reverse?'read':'picture'}`,`noun:${word}`,reverse?'What is this?':word,
  reverse?candidates.map(text):candidates.map(w=>image({...data,word:w},w)),word,reverse?sceneId(data):null,reverse?'word-choice':'image-choice');
 }
 for(const word of words)for(const offset of [7,17])for(const reverse of [false,true]){

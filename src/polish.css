@@ -1,0 +1,110 @@
+/* Artwork and its ground share a frame and scale on every device. */
+.player-marker{display:none}
+.monster-ground{display:none;position:absolute;left:24%;width:52%;height:7%;bottom:var(--ground-bottom,5%);border-radius:50%;background:#112c3970;filter:blur(2px);z-index:-1}
+.combatant .monster-ground{display:block}
+.combatant.player .monster-ground{background:#9cd57a66;border:1px solid #d2f4a0}
+.monster-art .sprite-pixels{transform-origin:50% calc(100% - var(--ground-bottom,5%))}
+/* Symbols carry the main information; numbers retain exact values. */
+.stat-symbol{width:22px;height:24px;flex:none;display:inline-block;vertical-align:middle}
+.stat-pips{display:flex;flex-wrap:wrap;align-items:center;gap:2px;min-width:0;max-width:100%}
+.stat-pips small{font-size:14px!important;white-space:nowrap}
+.visual-stats .stat-row{display:grid;grid-template-columns:60px minmax(0,1fr) auto;gap:6px;align-items:center}
+.visual-stats .stat-row>span:first-child{font-size:16px!important}.visual-stats .stat-row>strong{font-size:16px!important}
+.fighter-hud .hp-track{display:none}.fighter-hud>.stat-pips{margin:3px 0}
+.hud-visual{display:flex;align-items:center;gap:4px;min-width:0}.hud-visual .stat-symbol{width:17px;height:19px}
+.hud-visual small{font-size:14px}.fighter-hud .hp-line{font-size:14px}.fighter-hud .hp-line strong{font-size:16px}
+.fighter-hud .hud-stats{display:flex!important;gap:8px;margin-top:4px}.fighter-hud .hud-stats>span:last-child{display:none}
+.party-mini .stat-pips .stat-symbol{width:16px;height:18px}.party-mini .hp-track{display:none}
+.capture-icon{width:48px;height:48px;flex:none;vertical-align:middle}.phase-actions [data-action="capture"]{display:flex;align-items:center;justify-content:center;gap:8px}
+.reward-icon .capture-icon{width:40px;height:40px}
+/* Keep reading and answer choices larger than decorative headings. */
+.playing .question-help,.playing .question-hint,.playing .question-footnote{display:none}
+.playing .question-prompt h2{font-size:clamp(34px,4vw,48px);line-height:1.18}
+.playing .question-panel.long-prompt .question-prompt h2,.playing .question-panel.has-scene .question-prompt h2{font-size:clamp(26px,3vw,34px)}
+.playing .text-answers .answer{font-size:clamp(24px,2.9vw,32px);line-height:1.2;padding:8px 10px 8px 26px;min-height:48px;overflow-wrap:break-word}
+.playing .reading-passage{font-size:clamp(21px,2.5vw,27px);line-height:1.3}
+.playing .has-passage .question-prompt h2{font-size:clamp(23px,2.8vw,30px)}
+.playing .question-content{gap:8px;padding:10px}
+.playing .context-scene{width:100%;max-width:210px;margin:0 auto}
+.playing .context-scene .scene-art{height:100%;max-height:150px;width:100%}
+.playing .phase-layout .visual-stats{width:min(100%,370px)}
+/* A gentle charge, silhouette and reveal without changing species artwork. */
+.evolution-scene .capture-portrait{isolation:isolate}
+.evolution-scene .capture-portrait:before{content:'';position:absolute;inset:-15%;border:3px solid #ffe7a0;border-radius:50%;background:radial-gradient(#e4f8ff88,transparent 65%);animation:awakening-ring 2.6s ease-out both;z-index:-1}
+.evolution-scene .sprite-pixels{animation:awakening 2.6s ease-in-out both!important}
+.evolution-scene{border-color:#ffe6a1!important}.evolution-scene>.scene-heading{animation:awakening-title 2.6s both}
+.evolution-group h3{font-size:26px}.evolution-group strong{font-size:30px;color:#ffe59b}.evolution-group p{line-height:1.55!important}
+@keyframes awakening{0%{filter:brightness(.7);scale:.92}40%{filter:brightness(2) drop-shadow(0 0 15px #fff);scale:1.02}65%{filter:brightness(0) drop-shadow(0 0 24px #ffd269);scale:1.05}100%{filter:drop-shadow(0 0 12px #ffe69a);scale:1}}
+@keyframes awakening-ring{0%{opacity:0;transform:scale(.4)}40%{opacity:.8}100%{opacity:0;transform:scale(1.5)}}
+@keyframes awakening-title{0%,70%{opacity:.5}100%{opacity:1}}
+/* The last failed attempt ends with the wild monster leaving. */
+.catch-final-fail.catch-result.escaped .monster-art{animation:monster-leaves 1.35s ease-in both!important}
+.catch-final-fail:not(.catch-result) .monster-art{opacity:0;visibility:hidden}
+@keyframes monster-leaves{0%,25%{opacity:1;transform:translate(0,0) scale(1)}100%{opacity:0;transform:translate(80%,-45%) scale(.15)}}
+/* Opaque safe-area paint avoids our background bleeding into the status strip. */
+html{background:#101821}body{background:#101821}.topbar{background:#101821!important;backdrop-filter:none!important;filter:none}
+@media(max-width:760px) and (orientation:portrait){
+ .playing .play-column{grid-template-rows:minmax(0,.82fr) minmax(0,1.18fr)}
+ .playing .question-panel .question-content{padding:8px;gap:6px}
+ .playing .question-panel .question-prompt h2{font-size:32px}
+ .playing .question-panel.has-scene .question-prompt h2,.playing .question-panel.long-prompt .question-prompt h2{font-size:24px}
+ .playing .text-answers .answer{font-size:24px;padding:6px 6px 6px 24px}
+ .playing .has-passage .text-answers .answer{font-size:21px}
+ .playing .reading-passage{font-size:20px;line-height:1.25}
+ .playing .has-passage .question-prompt h2{font-size:22px}
+ .playing .context-scene .scene-art{max-height:100px}
+ .fighter-hud .stat-symbol{width:15px;height:17px}.fighter-hud .hud-visual .stat-symbol{width:12px;height:14px}
+ .fighter-hud .hp-line{margin:0}.fighter-hud{padding:5px!important}.fighter-hud .hud-stats{gap:4px}
+ .playing .phase-layout .visual-stats .stat-row{display:grid;grid-template-columns:45px 1fr auto;width:100%}
+ .playing .phase-layout .visual-stats{display:grid;gap:2px}.visual-stats .stat-symbol{width:18px;height:20px}
+ .capture-icon{width:36px;height:36px}
+ .evolution-group strong{font-size:25px}.evolution-group p{font-size:19px!important}
+}
+@media(prefers-reduced-motion:reduce){.evolution-scene .sprite-pixels,.evolution-scene .capture-portrait:before,.evolution-scene>.scene-heading{animation:none!important}.catch-final-fail.catch-result.escaped .monster-art{animation:none!important;opacity:0}}
+.playing .question-footnote:has(.reading-cue){display:flex;height:auto;min-height:0;padding:6px 10px;font-size:18px;line-height:1.25}
+.playing .question-footnote:has(.reading-cue)>span:first-child{display:none}
+.playing .question-panel.has-scene .context-scene{width:160px;height:120px;flex-basis:120px}
+@media(orientation:landscape){.playing .question-panel.has-scene .question-prompt{grid-template-columns:160px minmax(0,1fr)}}
+@media(max-width:760px) and (orientation:portrait){.playing .question-panel.has-scene .context-scene{width:110px;height:80px;flex-basis:80px}.playing .has-passage .question-content{grid-template-columns:1fr;grid-template-rows:auto minmax(0,1fr)}.playing .has-passage .question-prompt{flex:none}.playing .has-passage .reading-passage{margin:0;padding:5px 8px}}
+.fighter-hud .attack path{stroke:#6a4b28}
+.stage-scene .capture-portrait{flex-shrink:0;position:relative}
+@media(orientation:portrait){
+ .playing .phase-layout .stage-scene:not(.treasure-scene){display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);grid-template-rows:auto auto minmax(0,1fr);gap:6px;align-items:center;justify-items:center}
+ .stage-scene:not(.treasure-scene)>.scene-heading{grid-column:1/-1}
+ .stage-scene:not(.treasure-scene)>.capture-portrait{grid-column:1;grid-row:2/4;width:min(30vw,180px);height:min(30vw,180px);margin:0}
+ .stage-scene:not(.treasure-scene)>h2{grid-column:2;font-size:22px}
+ .stage-scene:not(.treasure-scene)>.type-badge{display:none}
+ .stage-scene:not(.treasure-scene)>.visual-stats{grid-column:2;grid-row:3;padding:5px;width:100%}
+ .playing .stage-scene .visual-stats .stat-row{padding:3px;grid-template-columns:auto 1fr auto;gap:3px}
+ .playing .stage-scene .visual-stats .stat-symbol{width:16px;height:18px}
+ .playing .stage-scene .visual-stats .stat-row>span:first-child{font-size:14px!important}
+}
+.primary .capture-icon path{stroke:#66502d}
+.playing .capture-screen>.visual-stats{display:none}
+@media(max-width:760px) and (orientation:portrait){
+ .fighter-hud .hp-line{display:none}.playing .fighter-hud .hud-title>strong{font-size:17px}
+ .playing .fighter-hud .side-label{font-size:13px;line-height:1.2;margin:-5px -5px 3px;padding:3px 5px}
+ .playing .has-passage>.panel-heading{display:flex;padding:4px 8px;min-height:32px}
+ .playing .has-passage>.panel-heading>span{display:none}.playing .has-passage>.panel-heading>small{margin-left:auto}
+ .playing .has-passage .reading-help{min-height:28px;padding:3px 8px;font-size:16px}
+ .playing .play-column:has(.has-passage){grid-template-rows:minmax(0,.65fr) minmax(0,1.35fr)}
+ .playing .feedback,.playing .has-passage .feedback{height:52px;min-height:52px;padding:5px 8px}
+ .playing .feedback>div>span{display:none}
+}
+.playing .has-passage .question-content{grid-template-rows:auto minmax(0,1fr)}
+.playing .has-passage .question-prompt{min-height:min-content;flex:none}
+.playing .has-passage .reading-passage{margin:0}
+@media(max-width:760px) and (orientation:portrait){
+ .short-viewport body.playing:has(.has-passage) .topbar,.short-viewport .playing:has(.has-passage) .stage-path{display:none}
+ .short-viewport .playing .play-column:has(.has-passage){grid-template-rows:90px minmax(0,1fr)}
+ .short-viewport .playing:has(.has-passage) .fighter-hud{top:4px!important;width:45%;padding:4px!important}
+ .short-viewport .playing:has(.has-passage) .fighter-hud .hud-stats,.short-viewport .playing:has(.has-passage) .side-label{display:none!important}
+ .short-viewport .playing:has(.has-passage) .combatant>.monster-art{width:60px;height:60px}
+ .short-viewport .playing:has(.has-passage) .combatant{bottom:0!important}
+ .playing .question-panel{position:relative}
+ .short-viewport .playing .feedback{position:absolute;bottom:0;left:0;right:0;z-index:5}
+ .playing .question-footnote:has(.reading-cue){font-size:16px}
+}
+.playing .has-passage>.panel-heading>small{display:block!important}
+.playing .reward-capture-up .reward-icon,.playing .reward-capture-up-plus .reward-icon,.playing .reward-golden-net .reward-icon{display:block;position:absolute;right:8px;top:8px}
+.playing .reward-capture-up .capture-icon,.playing .reward-capture-up-plus .capture-icon,.playing .reward-golden-net .capture-icon{width:26px;height:26px}

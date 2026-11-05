@@ -19,8 +19,8 @@ test('fragments complete permanent and current shields; special +2 adds both',()
   addShield(m,0,2);assert.equal(m.maxShield,5);assert.equal(m.currentShield,3);
 });
 test('shield evolution uses permanent stat even when all shields spent',()=>{
-  const m=createMonster('sprout');m.evolutionBaseline.shieldStat=2;m.maxShield=1;m.shieldFragments=2;m.currentShield=0;
-  assert.equal(shieldStat(m),6);assert.ok(evolve(m,'shield'));assert.equal(m.maxShield,2);assert.equal(m.currentShield,2);
+  const m=createMonster('sprout');m.evolutionBaseline.shieldStat=2;m.maxShield=3;m.shieldFragments=0;m.currentShield=0;
+  assert.equal(shieldStat(m),12);assert.ok(evolve(m,'shield'));assert.equal(m.maxShield,4);assert.equal(m.currentShield,4);
 });
 test('evolution baseline includes bonus and one reward cannot evolve twice',()=>{
   const m=createMonster('sprout');m.maxHp=10;m.evolutionBaseline.hp=5;

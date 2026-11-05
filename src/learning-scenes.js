@@ -24,8 +24,7 @@ function actor(person,action,color='blue'){
 export function learningScene(data){
  let body='';
  if(data.kind==='noun'){
-  if(data.context){body=noun('tree',4,8,54,55)+noun('ball',144,102,48,44)+'<rect x="52" y="14" width="99" height="140" rx="18" fill="#e3edf1" stroke="#e6bd55" stroke-width="5"/>'+noun(data.word,57,28,89,112);}
-  else body=noun(data.word,9,0,182,164);
+  body=noun(data.word,9,0,182,164);
  }
  if(data.kind==='pair')body=noun(data.word,2,27,95,119)+noun(data.companion,103,27,95,119);
  if(data.kind==='color')body=colored(data.object,data.color,100,74,data.size==='small'?.48:1)+(data.size?'<path d="M34 141H166" stroke="#8593a3" stroke-width="3"/>':'');
