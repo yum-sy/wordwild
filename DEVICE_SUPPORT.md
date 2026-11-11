@@ -1,0 +1,7 @@
+# Responsive installed play
+
+Both games use actual usable window dimensions rather than device names. iPad and Galaxy Z Fold4 are reference devices, not an allowlist. Portrait and near-square windows stack battle and learning; wide windows put them side by side. Very short landscape windows put passage and answers side by side. Lessons reserve their natural content height before assigning remaining space to the arena; sprites scale with the arena. English type only steps down when content needs it (minimum 22px answers/passage, 24px prompts).
+
+Safe-area insets, the visual viewport, rotation, resize, app restoration and standalone display changes are supported. Resizing only recalculates layout, without recreating the game. Manifest orientation is unrestricted. Existing save keys and install identity are retained. Installation does not imply offline support.
+
+QA uses isolated in-memory saves: `python3 scripts/prepare-device-qa.py`, then `/audio-previews/device-qa/index.html?phase=reading`. Representative usable CSS sizes: 344×882, 360×560, 390×844, 507×1000, 600×960, 691×829, 829×691, 768×1024, 1024×768, 960×600, 882×344. Long passages, long choices, pictures, start, capture, rewards, team and Parents are checked. These are browser viewport simulations, not a claim of physical-device standalone verification. System font/zoom settings and OS safe areas still need real-device review. Exceptionally small windows retain a scroll fallback rather than hide lesson content.
