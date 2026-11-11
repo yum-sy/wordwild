@@ -14,6 +14,7 @@ if(qaPhase==='failed'){game.phase='capture';game.attempts=3;game.captureResult='
 view=['home','dex','party','parents','learning','hall'].includes(qaPhase)?qaPhase:'game';
 if(qaPhase==='dex')game.phase='battle';
 if(qaPhase==='boss'){game.phase='battle';game.stage=100;game.enemy=createMonster(SPECIES.find(s=>s.isBoss)?.id||SPECIES.at(-1).id,100);game.enemy.rareForm='shiny';}
+const qaFeedback=new URLSearchParams(location.search).get('feedback');if(qaFeedback&&game.phase==='battle'){answer(game,qaFeedback==='wrong'?(game.question.correctIndex+1)%4:game.question.correctIndex);turnFrame=new URLSearchParams(location.search).get('turn')||'cue';}
 '''
 s=s.replace('\nrender();\n','\n'+fixture+'\nrender();\n')
 Path('src/qa-device-app.js').write_text(s)
