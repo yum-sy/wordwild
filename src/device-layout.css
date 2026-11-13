@@ -78,3 +78,7 @@ html[data-layout] body.playing .feedback .primary{min-height:26px;height:26px;pa
 /* Learning symbols use the full answer tile, independent of old scene heights. */
 html[data-layout] body.playing .answer>.scene-art{width:100%!important;height:100%!important;max-height:100%!important;image-rendering:auto}
 html[data-layout] body.playing .scene-art image{image-rendering:auto}
+
+/* Subject + action needs room for both symbols in sentence prompts. */
+html[data-layout] body.playing .question-panel.has-scene .question-prompt:has([data-subject]){grid-template-columns:clamp(120px,28vw,170px) minmax(0,1fr)}
+html[data-layout] body.playing .context-scene:has([data-subject]),html[data-layout] body.playing .context-scene:has([data-subject])>.scene-art{height:clamp(96px,18vw,144px)!important}

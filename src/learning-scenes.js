@@ -1,3 +1,4 @@
+import { placedPictogram, subjectAction } from './pictogram-art.js';
 import { wordPicture } from './word-pictures.js';
 export const PALETTE={red:'#df5757',blue:'#5797d7',yellow:'#eed05b',green:'#71ad69',orange:'#ed9a4f',purple:'#a07acc',pink:'#e598ba',black:'#424956'};
 export const sceneId=data=>'learn:'+JSON.stringify(data);
@@ -8,19 +9,6 @@ const colored=(shape,color,x=100,y=74,size=1)=>{
 };
 export const ACTIONS=['run','swim','sleep','read','eat','dance','jump','sit','stand','walk'];
 export const PEOPLE=['boy','girl','man','woman','robot','bear'];
-function actor(person,action,color='blue'){
- const pose={run:[[-27,55],[23,30],[-25,126],[30,106]],walk:[[-22,65],[23,68],[-25,131],[22,130]],jump:[[-27,20],[28,20],[-26,110],[29,110]],dance:[[-34,34],[25,52],[-29,125],[30,101]],stand:[[-20,77],[20,77],[-12,135],[12,135]],sit:[[-17,77],[22,80],[27,106],[35,125]],read:[[-20,65],[20,65],[-13,135],[13,135]],eat:[[-22,68],[15,30],[-13,135],[13,135]],sleep:[[-20,76],[20,76],[-13,135],[13,135]],swim:[[-33,35],[33,35],[-22,125],[25,117]]}[action];
- const [a,b,c,d]=pose;const adult=person==='man'||person==='woman';
- const head=person==='robot'?'<rect x="-18" y="2" width="36" height="34" rx="5" fill="#b7cbd4"/><path d="M0 2V-7"/>':person==='bear'?'<circle cx="-16" cy="6" r="10" fill="#b88e67"/><circle cx="16" cy="6" r="10" fill="#b88e67"/><circle cy="20" r="22" fill="#b88e67"/>':`<circle cy="20" r="${adult?18:22}" fill="#e5b48f"/><path d="M-20 16Q-23-9 12 0L22 14" fill="#785440"/>${['girl','woman'].includes(person)?'<path d="M-20 10L-26 47L-13 37M20 10L26 47L13 37" fill="#785440"/>':''}`;
- let body=`<g transform="translate(100 8)" stroke="#303b48" stroke-width="5" stroke-linecap="round" stroke-linejoin="round">${head}${action==='sleep'?'<path d="M-11 20h7M4 20h7" stroke-width="2"/>':'<circle cx="-7" cy="19" r="2" stroke="none"/><circle cx="7" cy="19" r="2" stroke="none"/>'}<path d="M-12 43H12L17 88H-17Z" fill="${PALETTE[color]}"/><path d="M-12 48L${a}M12 48L${b}M-9 88L${c}M9 88L${d}" fill="none"/>${action==='read'?'<path d="M-30 60L0 67L30 60V88L0 96L-30 88Z" fill="#fff1c6"/>':''}${action==='eat'?'<path d="M23 44L16 33"/><circle cx="16" cy="33" r="8" fill="#e96a5d"/>':''}</g>`;
- if(action==='sleep')body=`<g transform="translate(145 -14) rotate(70)">${body}</g><path d="M28 110H177V133H28ZM34 132V151M169 132V151" fill="#a6b9d0" stroke="#303b48" stroke-width="3"/>`;
- if(action==='swim')body=`<g transform="translate(145 -12) rotate(70)">${body}</g><path d="M12 100Q27 86 42 100T72 100T102 100T132 100T162 100T192 100V160H12Z" fill="#a1d5e7" opacity=".9"/>`;
- if(action==='sit')body+='<path d="M79 104H146M86 104V151M139 104V151" fill="none" stroke="#8b7053" stroke-width="7"/>';
- if(action==='jump')body+='<path d="M55 155H147M61 126V146M139 126V146" stroke="#a2adbc" stroke-width="3"/>';
- if(action==='dance')body+='<g fill="#bb7aa7" stroke="#303b48" stroke-width="2"><path d="M37 50V23L54 18V44M37 25L54 20" fill="none" stroke-width="4"/><ellipse cx="32" cy="51" rx="7" ry="5"/><ellipse cx="49" cy="45" rx="7" ry="5"/><path d="M160 55V30L174 35" fill="none" stroke-width="4"/><ellipse cx="155" cy="57" rx="7" ry="5"/></g>';
- if(action==='run')body+='<path d="M29 61H55M21 77H48M32 94H52" fill="none" stroke="#8d9baa" stroke-width="4" stroke-linecap="round"/>';
- return body;
-}
 export function learningScene(data){
  let body='';
  if(data.kind==='noun'){
@@ -29,15 +17,22 @@ export function learningScene(data){
  if(data.kind==='pair')body=noun(data.word,2,27,95,119)+noun(data.companion,103,27,95,119);
  if(data.kind==='color')body=colored(data.object,data.color,100,74,data.size==='small'?.48:1)+(data.size?'<path d="M34 141H166" stroke="#8593a3" stroke-width="3"/>':'');
  if(data.kind==='count'){const columns=data.count===4?2:data.count;const rows=data.count===4?2:1;const w=200/columns,h=160/rows;body=Array.from({length:data.count},(_,i)=>noun(data.word,4+(i%columns)*w,5+Math.floor(i/columns)*h,w-8,h-8,true)).join('');}
- if(data.kind==='action')body=actor(data.person,data.action,data.color);
+ if(data.kind==='action')body=subjectAction(data.person,data.action);
  if(data.kind==='position'){
-  const xy={in:[84,67],on:[84,28],under:[84,122],'next to':[151,81],above:[84,-3],between:[84,67]}[data.prep];
   const anchor=data.anchor||'box';
-  if(data.prep==='between')body=noun(anchor,0,65,65,85)+noun(anchor,135,65,65,85);
-  else if(anchor==='box')body='<path d="M49 60H143V117H49Z" fill="#cda878" stroke="#816747" stroke-width="3"/>';
-  else body=noun(anchor,35,45,125,90);
-  body+=noun(data.word,xy[0]-16,xy[1],40,39);
-  if(data.prep==='in')body+='<path d="M49 93H143V117H49Z" fill="#dfbc8f" stroke="#816747" stroke-width="2"/>';
+  const box=(x,y,w,h)=>`<g data-anchor="box"><rect x="${x}" y="${y}" width="${w}" height="${h}" rx="2" fill="#dec49c" stroke="#806b50" stroke-width="3"/><path d="M${x} ${y+8}H${x+w}" stroke="#b79b74" stroke-width="2"/></g>`;
+  const reference=(x,y,w,h)=>anchor==='box'?box(x,y,w,h):noun(anchor,x,y,w,h);
+  const subject=(x,y,w,h)=>placedPictogram(data.word,x,y,w,h)||noun(data.word,x,y,w,h);
+  if(data.prep==='between')body=reference(5,105,44,40)+reference(151,105,44,40)+subject(61,64,78,81);
+  else if(data.prep==='next to')body=reference(13,99,64,46)+subject(100,64,87,81);
+  else if(data.prep==='on')body=reference(59,99,82,44)+subject(54,19,92,80);
+  else if(data.prep==='above')body=reference(59,123,82,36)+subject(54,17,92,80);
+  else if(data.prep==='under')body=reference(59,12,82,36)+subject(54,76,92,80);
+  else if(data.prep==='in'){
+   body=reference(48,69,104,82)+subject(55,27,90,105);
+   if(anchor==='box')body+='<path d="M48 114H152V151H48Z" fill="#dec49c" stroke="#806b50" stroke-width="3"/><path d="M48 114L37 102M152 114L163 102" fill="none" stroke="#806b50" stroke-width="3"/>';
+  }
  }
+
  return `<svg class="scene-art learning-scene" viewBox="0 0 200 170" aria-hidden="true">${body}</svg>`;
 }
