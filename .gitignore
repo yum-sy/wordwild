@@ -10,3 +10,5 @@ assets/*preview.html
 assets/regions/preview.html
 src/qa-*
 qa-*.html
+
+/work/pictogram-review/

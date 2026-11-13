@@ -74,3 +74,7 @@ html[data-layout] body.playing .feedback .turn-progress{display:flex;align-items
 html[data-layout] body.playing .feedback .turn-progress i{width:32px;height:3px;margin:0;background:linear-gradient(90deg,currentColor 40%,transparent 40%);background-size:12px 100%}
 html[data-layout] body.playing .battle-status:has(.primary){overflow:visible}
 html[data-layout] body.playing .feedback .primary{min-height:26px;height:26px;padding:2px 8px;font-size:13px}
+
+/* Learning symbols use the full answer tile, independent of old scene heights. */
+html[data-layout] body.playing .answer>.scene-art{width:100%!important;height:100%!important;max-height:100%!important;image-rendering:auto}
+html[data-layout] body.playing .scene-art image{image-rendering:auto}

@@ -13,5 +13,5 @@ async function copy(source){
  }else await copyFile(source,dest);
 }
 async function walk(dir){for(const e of await readdir(dir,{withFileTypes:true})){const p=path.join(dir,e.name);if(e.isDirectory())await walk(p);else if(dir.startsWith('src')?/\.(js|css)$/.test(p)&&!e.name.startsWith('qa-'):/\.(png|svg|m4a)$/.test(p))await copy(p);}}
-await copy('index.html');await copy('manifest.webmanifest');await walk('src');await walk('assets');await writeFile('dist/.nojekyll','');
+await copy('index.html');await copy('pictograms.html');await copy('docs/pictogram-audit.json');await copy('manifest.webmanifest');await walk('src');await walk('assets');await writeFile('dist/.nojekyll','');
 console.log(`Built Pages site for ${base}`);

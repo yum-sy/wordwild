@@ -1,3 +1,4 @@
+import { pictogramPicture } from './pictogram-art.js';
 import { designQuestion } from './curriculum-design.js';
 import { wordPicture } from './word-pictures.js';
 import { BALANCE } from './balance.js';
@@ -63,9 +64,9 @@ export function generateQuestion(stage,recent=[],rng=Math.random,profile=null){
  return {...source,sourceType,options,correctIndex:options.findIndex(o=>o.correct)};
 }
 
-export function sceneArt(id) {
+export function sceneArt(id,{actionOnly=false}={}) {
   if(!id) return '';
-  if(id.startsWith('learn:'))return learningScene(JSON.parse(id.slice(6)));
+  if(id.startsWith('learn:')){const data=JSON.parse(id.slice(6));if(actionOnly&&data.kind==='action')return pictogramPicture(data.action)||learningScene(data);return learningScene(data);}
   const colors=[['red','red','#e66e60'],['blue','blue','#6a9fcc'],['yellow','yellow','#edc95c'],['green','green','#89ac75']];
   const [kind,value] = id.split(':');
   if(kind==='word') return wordPicture(value);

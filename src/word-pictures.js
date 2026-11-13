@@ -1,3 +1,4 @@
+import { pictogramPicture } from './pictogram-art.js';
 import { EXTRA_PICTURES } from './extra-pictures.js';
 // Fixed, platform-independent vocabulary art. No text is baked into answer pictures.
 const ink='#303b48';
@@ -26,7 +27,9 @@ moon:`<path d="M132 19A65 65 0 1 0 159 124Q100 134 85 89Q70 44 132 19Z" fill="#f
 };
 Object.assign(pictures,EXTRA_PICTURES);
 export const WORD_PICTURE_IDS=Object.freeze(Object.keys(pictures));
-export function wordPicture(word){
+export function wordPicture(word,{counting=false}={}){
+ // A whole melon plus a slice can imply two objects; keep one clear slice for counting.
+ if(!(counting&&word==='watermelon')){const picto=pictogramPicture(word);if(picto)return picto;}
  const body=pictures[word];if(!body)return '';
  return `<svg class="word-picture scene-art" viewBox="0 0 200 170" aria-hidden="true" focusable="false"><g stroke="${ink}" stroke-width="3" stroke-linejoin="round" stroke-linecap="round">${body}</g></svg>`;
 }

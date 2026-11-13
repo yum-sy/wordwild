@@ -1,7 +1,7 @@
 import { wordPicture } from './word-pictures.js';
 export const PALETTE={red:'#df5757',blue:'#5797d7',yellow:'#eed05b',green:'#71ad69',orange:'#ed9a4f',purple:'#a07acc',pink:'#e598ba',black:'#424956'};
 export const sceneId=data=>'learn:'+JSON.stringify(data);
-const noun=(word,x,y,w=85,h=75)=>wordPicture(word).replace('class="word-picture scene-art"','').replace('<svg ',`<svg x="${x}" y="${y}" width="${w}" height="${h}" `);
+const noun=(word,x,y,w=85,h=75,counting=false)=>wordPicture(word,{counting}).replace('class="word-picture scene-art"','').replace('<svg ',`<svg x="${x}" y="${y}" width="${w}" height="${h}" `);
 const colored=(shape,color,x=100,y=74,size=1)=>{
  const shapes={ball:'<circle r="36"/>',box:'<rect x="-34" y="-30" width="68" height="60"/>',star:'<path d="M0-40L12-13L42-11L20 9L26 39L0 24L-26 39L-20 9L-42-11L-12-13Z"/>',hat:'<path d="M-25 12V-30H25V12M-43 12H43V25H-43Z"/>',cup:'<path d="M-27-32H20V30H-27ZM20-21Q52-25 45 5Q37 20 20 11"/>',shirt:'<path d="M-18-33L-39-22L-48 0L-29 12L-23 0V37H23V0L29 12L48 0L39-22L18-33Q0-12-18-33Z"/>',bag:'<rect x="-30" y="-25" width="60" height="60" rx="6"/><path d="M-14-25V-39H14V-25" fill="none"/>',car:'<path d="M-44 2L-24-25H20L38 2H48V25H-48V2Z"/><path d="M-20-19H15L30 0H-33Z" fill="#e3f1f4"/><circle cx="-28" cy="26" r="9" fill="#323b48"/><circle cx="29" cy="26" r="9" fill="#323b48"/>',boat:'<path d="M-45 13H45L29 37H-27ZM0-42L-30 7H0Z"/><path d="M3-42V13"/>',kite:'<path d="M0-42L30-6L0 30L-30-6Z"/><path d="M0 30Q28 42 7 52" fill="none"/>'};
  return `<g transform="translate(${x} ${y}) scale(${size})" fill="${PALETTE[color]}" stroke="#303b48" stroke-width="3" stroke-linejoin="round">${shapes[shape]}</g>`;
@@ -28,7 +28,7 @@ export function learningScene(data){
  }
  if(data.kind==='pair')body=noun(data.word,2,27,95,119)+noun(data.companion,103,27,95,119);
  if(data.kind==='color')body=colored(data.object,data.color,100,74,data.size==='small'?.48:1)+(data.size?'<path d="M34 141H166" stroke="#8593a3" stroke-width="3"/>':'');
- if(data.kind==='count'){const columns=data.count===4?2:data.count;const rows=data.count===4?2:1;const w=200/columns,h=160/rows;body=Array.from({length:data.count},(_,i)=>noun(data.word,4+(i%columns)*w,5+Math.floor(i/columns)*h,w-8,h-8)).join('');}
+ if(data.kind==='count'){const columns=data.count===4?2:data.count;const rows=data.count===4?2:1;const w=200/columns,h=160/rows;body=Array.from({length:data.count},(_,i)=>noun(data.word,4+(i%columns)*w,5+Math.floor(i/columns)*h,w-8,h-8,true)).join('');}
  if(data.kind==='action')body=actor(data.person,data.action,data.color);
  if(data.kind==='position'){
   const xy={in:[84,67],on:[84,28],under:[84,122],'next to':[151,81],above:[84,-3],between:[84,67]}[data.prep];
